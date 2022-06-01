@@ -1,21 +1,6 @@
 import client from './client'
-import { ApolloProvider, gql, useQuery } from '@apollo/client'
-
-const ME = gql`
-  query me {
-    user(login: "four-orfa") {
-      name
-    }
-  }
-`
-const Me = () => {
-  const { loading, error, data } = useQuery(ME)
-
-  if (loading) return 'Loading...'
-  if (error) return `Error! ${error.message}`
-
-  return <div>{data.user.name}</div>
-}
+import { ApolloProvider } from '@apollo/client'
+import Me from './Me'
 
 const App = () => {
   return (
