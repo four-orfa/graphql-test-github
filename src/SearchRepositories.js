@@ -36,8 +36,11 @@ const SearchRepositories = (props) => {
 
   if (loading) return 'Loading...'
   if (error) return `Error! ${error.message}`
-  console.log(data)
-  return <div>{}</div>
+
+  const repositoryCount = data.search.repositoryCount
+  const repositoryUnit = repositoryCount === 1 ? 'Repository' : 'Repositories'
+  const title = `Github Repositories Search - ${repositoryCount} ${repositoryUnit}`
+  return <div>{title}</div>
 }
 
 export default SearchRepositories

@@ -5,6 +5,7 @@ import Me from './Me'
 import SearchRepositories from './SearchRepositories'
 
 const App = () => {
+  const [query, setQuery] = useState('')
   const [state, setState] = useState({
     first: 3,
     after: null,
@@ -13,15 +14,22 @@ const App = () => {
     query: '',
   })
 
+  const searchRepositories = () => {
+    setState({ ...state, query: query })
+  }
+
   return (
     <ApolloProvider client={client}>
       <form>
         <input
-          value={state.query}
+          value={query}
           onChange={(e) => {
-            setState({ ...state, query: e.target.value })
+            setQuery(e.target.value)
           }}
         />
+        <button type='button' onClick={searchRepositories}>
+          Search Repositories
+        </button>
       </form>
       <Me />
       <SearchRepositories variables={state} />
