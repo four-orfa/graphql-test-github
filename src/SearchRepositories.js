@@ -17,7 +17,8 @@ const SearchRepositories = (props) => {
     e.preventDefault()
   }
 
-  const searchRepositories = () => {
+  const searchRepositories = (e) => {
+    e.preventDefault()
     setState({ ...state, query: query })
   }
 
@@ -61,8 +62,15 @@ const SearchRepositories = (props) => {
   const repositoryUnit = repositoryCount === 1 ? 'Repository' : 'Repositories'
   const title = `Github Repositories Search - ${repositoryCount} ${repositoryUnit}`
 
-  const nextPage = (search) => {}
-
+  const nextPage = (search) => {
+    setState({
+      first: PER_PAGE,
+      after: search.pageInfo.endCursor,
+      last: null,
+      before: null,
+      query: query,
+    })
+  }
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -90,7 +98,7 @@ const SearchRepositories = (props) => {
           )
         })}
       </ul>
-      {data.search.pageInfo.hasNextPage ? <button onClick={nextPage(data.search)}>Next</button> : null}
+      {data.search.pageInfo.hasNextPage ? <button onClick={() => nextPage(data.search)}>Next</button> : null}
     </>
   )
 }

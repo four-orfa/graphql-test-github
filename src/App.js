@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import client from './client'
 import { ApolloProvider } from '@apollo/client'
 import SearchRepositories from './SearchRepositories'
