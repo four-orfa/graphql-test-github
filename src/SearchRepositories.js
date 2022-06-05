@@ -40,7 +40,21 @@ const SearchRepositories = (props) => {
   const repositoryCount = data.search.repositoryCount
   const repositoryUnit = repositoryCount === 1 ? 'Repository' : 'Repositories'
   const title = `Github Repositories Search - ${repositoryCount} ${repositoryUnit}`
-  return <div>{title}</div>
+  return (
+    <>
+      <h2>{title}</h2>
+      <ul>
+        {data.search.edges.map((edge) => {
+          const node = edge.node
+          return (
+            <li key={node.id}>
+              <a href={node.url}>{node.name}</a>
+            </li>
+          )
+        })}
+      </ul>
+    </>
+  )
 }
 
 export default SearchRepositories

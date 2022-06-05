@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import client from './client'
 import { ApolloProvider } from '@apollo/client'
-import Me from './Me'
 import SearchRepositories from './SearchRepositories'
 
 const App = () => {
@@ -28,10 +27,9 @@ const App = () => {
           }}
         />
         <button type='button' onClick={searchRepositories}>
-          Search Repositories
+          Search
         </button>
       </form>
-      <Me />
       <SearchRepositories variables={state} />
     </ApolloProvider>
   )
