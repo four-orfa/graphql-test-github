@@ -71,6 +71,17 @@ const SearchRepositories = (props) => {
       query: query,
     })
   }
+
+  const previousPage = (search) => {
+    setState({
+      first: null,
+      after: null,
+      last: PER_PAGE,
+      before: search.pageInfo.startCursor,
+      query: query,
+    })
+  }
+
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -80,9 +91,7 @@ const SearchRepositories = (props) => {
             setQuery(e.target.value)
           }}
         />
-        <button type='button' onClick={searchRepositories}>
-          Search
-        </button>
+        <button onClick={searchRepositories}>Search</button>
       </form>
 
       <h2>{title}</h2>
@@ -98,6 +107,9 @@ const SearchRepositories = (props) => {
           )
         })}
       </ul>
+      {data.search.pageInfo.hasPreviousPage ? (
+        <button onClick={() => previousPage(data.search)}>Previous</button>
+      ) : null}
       {data.search.pageInfo.hasNextPage ? <button onClick={() => nextPage(data.search)}>Next</button> : null}
     </>
   )
