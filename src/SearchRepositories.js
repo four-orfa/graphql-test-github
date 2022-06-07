@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { gql, useQuery } from '@apollo/client'
+import StarButton from './StarButton'
 
 const SearchRepositories = (props) => {
   const PER_PAGE = 3
@@ -68,7 +69,7 @@ const SearchRepositories = (props) => {
       after: search.pageInfo.endCursor,
       last: null,
       before: null,
-      query: query,
+      query,
     })
   }
 
@@ -78,7 +79,7 @@ const SearchRepositories = (props) => {
       after: null,
       last: PER_PAGE,
       before: search.pageInfo.startCursor,
-      query: query,
+      query,
     })
   }
 
@@ -103,6 +104,8 @@ const SearchRepositories = (props) => {
               <a href={node.url} target='_blank' rel='noopener noreferrer'>
                 {node.name}
               </a>
+              &nbsp;
+              <StarButton node={node} />
             </li>
           )
         })}
